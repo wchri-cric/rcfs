@@ -5,6 +5,8 @@
  * VERSION:		0.1
  * DATE:		2017-08-18
  * AUTHOR:		Rick Watts (rick.watts@ualberta.ca)
+ *
+ * 2017-08-25	RW	Send correct content type for log and txt files.
  */
 
 // define the root of the document tree for the included files
@@ -55,8 +57,11 @@ if (!file_exists($file)) exit("Error: ". $file. " file not found!");
     {
         case "html":
         case "htm":
-        case "log":
+            readfile($file);
+            break;
+		case "log":
         case "txt":
+			header('Content-Type: text/plain');
             readfile($file);
             break;
         case "pdf":
